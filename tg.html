@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ג'וֹבְּנִיקִים - ערוץ הקריירה למשרתי המילואים</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1d4ed8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+            z-index: -2;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            max-width: 80%;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .small-title {
+            font-size: 0.5rem;
+            margin-bottom: 2rem;
+            max-width: 80%;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .mall-title {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            animation: fadeInUp 1.4s ease-out;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 1rem;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .social-button {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 180px;
+            height: 56px;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .social-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .whatsapp {
+            background-color: #25D366;
+        }
+
+        .telegram {
+            background-color: #0088cc;
+        }
+
+        a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: rgb(255, 255, 255);
+            text-decoration: underline;
+        }
+
+        .loading-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #0088cc;
+            width: 0%;
+            animation: fillProgress 3s linear forwards;
+            border-radius: 2px;
+        }
+
+        @keyframes fillProgress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .small-title {
+                font-size: 0.5rem;
+            }
+
+            .social-button {
+                padding: 0.8rem 1.6rem;
+                width: 150px;
+                height: 48px;
+                font-size: 1rem;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Add a countdown display */
+        .countdown {
+            font-size: 2rem;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #0088cc;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="overlay"></div>
+        
+        <h1 class="title">ג'וֹבְּנִיקִים</h1>
+        <p class="subtitle">תכף תועברו לערוץ הטלגרם</p>
+        <p class="subtitle">למעבר מיידי, <a href="https://t.me/jobnikim">לחצו כאן</a>.</p>
+        
+        <div id="loading-container" class="loading-container">
+            <div class="spinner"></div>
+            <p style="margin-top: 15px; font-size: 1.2rem;">מעביר...</p>
+            <div class="countdown" id="countdown">3</div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+        
+        <div class="buttons-container" id="buttons-container" style="display: none;">
+            <a class="social-button telegram" href="https://t.me/jobnikim" target="_blank" rel="noopener">
+                טלגרם
+            </a>
+            <a class="social-button whatsapp" href="https://whatsapp.com/channel/0029Vaysx0FLo4hmITMt4v0z" target="_blank" rel="noopener">
+                וואטסאפ
+            </a>
+        </div>
+        
+        <p class="mall-title">
+            <a href="https://osimyoter.co.il" target="_blank" rel="noopener">
+                מבית עושים יותר ו"דרושים - למילואים"
+            </a>
+        </p>
+        <p class="mall-title">
+            <a href="https://wa.me/972559436165">צור קשר</a>
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if we are NOT in the WordPress editor
+            if (!window.location.href.includes('wp-admin') && 
+                !window.location.href.includes('customize.php') && 
+                !window.location.href.includes('elementor')) {
+                
+                // Show the loading spinner
+                const loadingContainer = document.getElementById('loading-container');
+                loadingContainer.style.display = 'flex';
+                
+                // Countdown timer
+                let seconds = 3;
+                const countdownElement = document.getElementById('countdown');
+                
+                const countdownInterval = setInterval(function() {
+                    seconds--;
+                    if (countdownElement) {
+                        countdownElement.textContent = seconds;
+                    }
+                    
+                    if (seconds <= 0) {
+                        clearInterval(countdownInterval);
+                        // Redirect to Telegram
+                        window.location.href = 'https://t.me/jobnikim';
+                    }
+                }, 1000);
+                
+                // Also set a backup redirect after 3.5 seconds
+                setTimeout(function() {
+                    window.location.href = 'https://t.me/jobnikim';
+                }, 3500);
+            } else {
+                // If in editor, show the buttons for preview
+                const buttonsContainer = document.getElementById('buttons-container');
+                if (buttonsContainer) {
+                    buttonsContainer.style.display = 'flex';
+                }
+            }
+        });
+
+        // Add a function to cancel redirect if user clicks anywhere
+        document.addEventListener('click', function(e) {
+            // If clicked on anything except the direct Telegram link
+            if (!e.target.closest('a[href*="t.me"]')) {
+                // You can optionally stop the redirect here
+                // by clearing timeouts if needed
+            }
+        });
+    </script>
+</body>
+</html>
